@@ -11,7 +11,10 @@ django = "*"
 gunicorn = "*"
 "psycopg2" = "*"
 whitenoise = "*"
-django-storages = "*"
+"boto3" = "*"
+apache-libcloud = {git = "https://github.com/itamaro/libcloud.git", editable = true, ref = "tencent-cos"}
+"qcloud-cos-v4" = {git = "https://github.com/itamaro/cos-python-sdk-v4.git", editable = true, ref = "python3"}
+django-storages = {git = "https://github.com/itamaro/django-storages.git", editable = true, ref = "libcloud-extra-kwargs"}
 
 
 [requires]

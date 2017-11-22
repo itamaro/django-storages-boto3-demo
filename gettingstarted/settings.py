@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
-    'hello'
+    'hello',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -139,7 +139,8 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.apache_libcloud.LibCloudStorage'
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -147,3 +148,22 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY', '')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_KEY', '')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_S3_BUCKET', '')
+
+LIBCLOUD_PROVIDERS = {
+    'amazon-1': {
+        'type': 'libcloud.storage.types.Provider.S3',
+        'user': AWS_ACCESS_KEY_ID,
+        'key': AWS_SECRET_ACCESS_KEY,
+        'bucket': AWS_STORAGE_BUCKET_NAME,
+    },
+    'tencent-cos-1': {
+        'type': 'libcloud.storage.types.Provider.TENCENT_COS',
+        'user': os.environ.get('COS_API_KEY_ID', ''),
+        'key': os.environ.get('COS_API_SECRET_KEY', ''),
+        'region': os.environ.get('COS_REGION', ''),
+        'app_id': int(os.environ.get('COS_APP_ID', '')),
+        'bucket': os.environ.get('COS_BUCKET_NAME', ''),
+    }
+}
+# DEFAULT_LIBCLOUD_PROVIDER = 'amazon-1'
+DEFAULT_LIBCLOUD_PROVIDER = 'tencent-cos-1'
