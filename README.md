@@ -48,7 +48,7 @@ or
 
 ## Using the Demo
 
-Using the admin interface (with the credentials of the superuser created)
+Using the admin interface (with the credentials of the superuser created), create "UploadedImage" records, uploading images from your local machine, then view the images ob the home page of the app.
 
 ## Documentation
 
