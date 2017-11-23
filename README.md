@@ -17,10 +17,10 @@ $ createdb django_storages_boto3
 $ pipenv run python manage.py migrate
 $ pipenv run python manage.py collectstatic
 
-$ heroku local
+$ pipenv run heroku local -p 8000 web
 ```
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+Your app should now be running on [localhost:8000](http://localhost:8000/).
 
 ## Deploying to Heroku
 
