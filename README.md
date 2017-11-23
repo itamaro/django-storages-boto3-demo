@@ -15,7 +15,13 @@ $ pipenv install
 $ createdb django_storages_boto3
 
 $ pipenv run python manage.py migrate
+$ pipenv run python manage.py createsuperuser
 $ pipenv run python manage.py collectstatic
+$ cat <<EOF >.env
+AWS_ACCESS_KEY="<Access-Key>"
+AWS_SECRET_KEY="<Secret-Key>"
+AWS_S3_BUCKET="S3-Bucket"
+EOF
 
 $ pipenv run heroku local -p 8000 web
 ```
@@ -29,11 +35,20 @@ $ heroku create
 $ git push heroku master
 
 $ heroku run python manage.py migrate
+$ heroku run python manage.py createsuperuser
+$ heroku config:set \
+    AWS_ACCESS_KEY="<Access-Key>" \
+    AWS_SECRET_KEY="<Secret-Key>" \
+    AWS_S3_BUCKET="S3-Bucket"
 $ heroku open
 ```
 or
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+## Using the Demo
+
+Using the admin interface (with the credentials of the superuser created)
 
 ## Documentation
 
