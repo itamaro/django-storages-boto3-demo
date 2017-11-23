@@ -1,23 +1,21 @@
-# Python: Getting Started
+# Django Storages S3Boto3 Demo
 
-A barebones Django app, which can easily be deployed to Heroku.
-
-This application supports the [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python) article - check it out.
+A demo Django app using django-storages with S3Boto3 backend to display images from S3 bucket, uploaded from admin interface.
 
 ## Running Locally
 
 Make sure you have Python [installed properly](http://install.python-guide.org).  Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/) and [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
 
 ```sh
-$ git clone git@github.com:heroku/python-getting-started.git
-$ cd python-getting-started
+$ git clone git@github.com:itamaro/django-storages-boto3-demo.git
+$ cd django-storages-boto3-demo
 
 $ pipenv install
 
-$ createdb python_getting_started
+$ createdb django_storages_boto3
 
-$ python manage.py migrate
-$ python manage.py collectstatic
+$ pipenv run python manage.py migrate
+$ pipenv run python manage.py collectstatic
 
 $ heroku local
 ```
