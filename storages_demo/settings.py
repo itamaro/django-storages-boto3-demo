@@ -1,5 +1,5 @@
 """
-Django settings for gettingstarted project, on Heroku. For more info, see:
+Django settings for storages_demo project, on Heroku. For more info, see:
 https://github.com/heroku/heroku-django-template
 
 For more information on this file, see
@@ -27,7 +27,7 @@ SECRET_KEY = 'i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t@=8s@axc41ml*f=s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEST_RUNNER = 'gettingstarted.heroku_test_runner.HerokuDiscoverRunner'
+TEST_RUNNER = 'storages_demo.heroku_test_runner.HerokuDiscoverRunner'
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'storages',
     'hello',
+    'images',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,7 +58,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'gettingstarted.urls'
+ROOT_URLCONF = 'storages_demo.urls'
 
 TEMPLATES = [
     {
@@ -76,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'gettingstarted.wsgi.application'
+WSGI_APPLICATION = 'storages_demo.wsgi.application'
 
 
 # Database
@@ -139,8 +140,7 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-DEFAULT_FILE_STORAGE = 'storages.backends.apache_libcloud.LibCloudStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -148,22 +148,3 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY', '')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_KEY', '')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_S3_BUCKET', '')
-
-LIBCLOUD_PROVIDERS = {
-    'amazon-1': {
-        'type': 'libcloud.storage.types.Provider.S3',
-        'user': AWS_ACCESS_KEY_ID,
-        'key': AWS_SECRET_ACCESS_KEY,
-        'bucket': AWS_STORAGE_BUCKET_NAME,
-    },
-    'tencent-cos-1': {
-        'type': 'libcloud.storage.types.Provider.TENCENT_COS',
-        'user': os.environ.get('COS_API_KEY_ID', ''),
-        'key': os.environ.get('COS_API_SECRET_KEY', ''),
-        'region': os.environ.get('COS_REGION', ''),
-        'app_id': int(os.environ.get('COS_APP_ID', '')),
-        'bucket': os.environ.get('COS_BUCKET_NAME', ''),
-    }
-}
-# DEFAULT_LIBCLOUD_PROVIDER = 'amazon-1'
-DEFAULT_LIBCLOUD_PROVIDER = 'tencent-cos-1'
